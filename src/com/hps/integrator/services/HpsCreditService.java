@@ -276,7 +276,8 @@ public class HpsCreditService extends HpsService {
     public HpsCharge charge(PaymentData paymentData, HpsCardHolder cardHolder, boolean allowDuplicates,
                             boolean requestMultiUseToken, String descriptor, HpsTransactionDetails details,
                             HpsDirectMarketData directMarketData) throws HpsException {
-        BigDecimal amount = new BigDecimal(Integer.parseInt(paymentData.getTransactionAmount()) / 100);
+
+        BigDecimal amount = paymentData.getDollarAmount();
 
         HpsInputValidation.checkAmount(amount);
         HpsInputValidation.checkCurrency("usd"); // TODO: this needs be parsed from the payment data
@@ -471,7 +472,8 @@ public class HpsCreditService extends HpsService {
 
     public HpsAuthorization authorize(PaymentData paymentData, HpsCardHolder cardHolder, boolean allowDuplicates,
                                       boolean requestMultiUseToken, String descriptor, HpsTransactionDetails details) throws HpsException {
-        BigDecimal amount = new BigDecimal(Integer.parseInt(paymentData.getTransactionAmount()) / 100);
+
+        BigDecimal amount = paymentData.getDollarAmount();
 
         HpsInputValidation.checkAmount(amount);
         HpsInputValidation.checkCurrency("usd");

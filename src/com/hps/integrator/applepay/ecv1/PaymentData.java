@@ -6,6 +6,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.hps.integrator.infrastructure.HpsException;
 
+import java.math.BigDecimal;
+
 public class PaymentData
 {
     // <editor-fold desc="private variables">
@@ -61,6 +63,10 @@ public class PaymentData
 
     public String getTransactionAmount() {
         return mTransactionAmount;
+    }
+
+    public BigDecimal getDollarAmount() {
+        return new BigDecimal(getTransactionAmount()).movePointLeft(2);
     }
 
     protected void hydrateFromJson() throws HpsException
